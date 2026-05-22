@@ -1,0 +1,114 @@
+/* =====================
+   profile.css — Profile page styles
+   ===================== */
+
+/* Profile layout: single column on mobile, two columns on desktop */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+@media (min-width: 768px) {
+    .profile-layout {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+/* Sidebar */
+.profile-sidebar {
+    text-align: center;
+}
+
+.profile-photo-container {
+    margin-bottom: var(--spacing-md);
+}
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--clr-primary);
+}
+
+.profile-role {
+    color: var(--clr-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+}
+
+/* Plan section inside sidebar */
+.plan-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.plan-section h4 {
+    font-family: var(--font-titles);
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-sm);
+}
+.plan-tag {
+    margin: 10px 0;
+}
+
+/* Profile form */
+.profile-content h3 {
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--clr-background);
+    padding-bottom: var(--spacing-sm);
+}
+.form-actions {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    justify-content: flex-start;
+}
+.password-hint {
+    font-weight: 400;
+    color: #9CA3AF;
+}
+
+/* Enrolled classes section */
+.enrolled-section {
+    margin-top: 24px;
+}
+.enrolled-section h3 {
+    margin-bottom: 16px;
+}
+.enrolled-empty {
+    color: #9CA3AF;
+}
+.enrolled-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.enrolled-row-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.enrolled-row-trainer {
+    color: #9CA3AF;
+}
+.enrolled-row-date {
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+/* Logout link */
+.logout-link {
+    color: #DC2626;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.logout-link:hover {
+    color: #991B1B;
+    text-decoration: underline;
+}

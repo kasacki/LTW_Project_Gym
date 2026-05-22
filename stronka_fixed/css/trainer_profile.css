@@ -1,0 +1,336 @@
+/* =====================
+   trainer_profile.css — Public Trainer Profile
+   ===================== */
+
+/* Hero Card */
+.tp-hero {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    padding: 32px;
+}
+
+.tp-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--clr-primary);
+    flex-shrink: 0;
+}
+
+.tp-hero-right { flex: 1; }
+
+.tp-hero-right h2 {
+    font-family: var(--font-titles);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.tp-role {
+    color: var(--clr-text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.tp-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tp-stars {
+    color: #F59E0B;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.tp-rating-val {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--clr-text-main);
+}
+
+.tp-rating-count {
+    color: var(--clr-text-muted);
+    font-size: 0.85rem;
+}
+
+.tp-no-rating {
+    color: var(--clr-text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.tp-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.tp-certs {
+    font-size: 0.88rem;
+    color: var(--clr-text-muted);
+    margin-bottom: 12px;
+}
+
+.tp-bio {
+    font-size: 0.92rem;
+    color: var(--clr-text-main);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Layout */
+.tp-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    align-items: start;
+}
+
+.tp-section {
+    margin-bottom: 24px;
+}
+
+.tp-section h3 {
+    font-family: var(--font-titles);
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E5E7EB;
+}
+
+/* Classes list */
+.tp-classes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tp-class-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    background: #FAFAFA;
+    gap: 12px;
+}
+
+.tp-class-meta {
+    font-size: 0.82rem;
+    color: var(--clr-text-muted);
+    margin-top: 4px;
+}
+
+.tp-class-spots {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #059669;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tp-class-spots.full { color: #DC2626; }
+
+/* Reviews */
+.tp-reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tp-review-row {
+    padding: 14px;
+    background: #F8FAFC;
+    border-radius: var(--border-radius);
+    border: 1px solid #E5E7EB;
+}
+
+.tp-review-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.tp-review-stars {
+    color: #F59E0B;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.tp-review-date {
+    color: var(--clr-text-muted);
+    font-size: 0.78rem;
+    margin-left: auto;
+}
+
+.tp-review-comment {
+    font-size: 0.9rem;
+    color: var(--clr-text-main);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Forms */
+.tp-form .form-group {
+    margin-bottom: 14px;
+}
+
+/* Star Picker */
+.star-picker {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.star-picker .star {
+    font-size: 1.8rem;
+    color: #D1D5DB;
+    cursor: pointer;
+    transition: color 0.1s;
+    line-height: 1;
+}
+
+.star-picker .star.active,
+.star-picker .star.selected {
+    color: #F59E0B;
+}
+
+/* Trainers Grid on index */
+.trainers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.trainer-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+    overflow: hidden;
+}
+
+.trainer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.trainer-card-photo-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #F1F5F9;
+}
+
+.trainer-card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+
+.trainer-card:hover .trainer-card-photo {
+    transform: scale(1.04);
+}
+
+.trainer-card-body {
+    padding: 18px;
+}
+
+.trainer-card-body h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--clr-text-main);
+}
+
+.trainer-card-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.trainer-card-bio {
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.trainer-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-size: 0.85rem;
+}
+
+.trainer-stars { color: #F59E0B; letter-spacing: 1px; }
+.trainer-rating-val { font-weight: 700; color: var(--clr-text-main); }
+.trainer-rating-count { color: var(--clr-text-muted); }
+.trainer-no-rating { color: var(--clr-text-muted); font-style: italic; }
+
+.trainer-card-btn {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* Home Tabs */
+.home-tabs-wrap {
+    border-bottom: 2px solid #E5E7EB;
+    background: var(--clr-surface);
+}
+
+.home-tabs {
+    display: flex;
+    gap: 4px;
+    padding-top: 8px;
+}
+
+.home-tab {
+    background: none;
+    border: none;
+    padding: 12px 28px;
+    font-family: var(--font-titles);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--clr-text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.home-tab:hover { color: var(--clr-primary); }
+
+.home-tab.active {
+    color: var(--clr-primary-dark);
+    border-bottom-color: var(--clr-primary);
+}
+
+.home-tab-content { display: none; }
+.home-tab-content.active { display: block; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tp-hero { flex-direction: column; align-items: center; text-align: center; }
+    .tp-specs { justify-content: center; }
+    .tp-layout { grid-template-columns: 1fr; }
+    .trainers-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
