@@ -1,0 +1,207 @@
+/* =====================
+   classes.css — Class schedule page styles
+   ===================== */
+
+.filters-section {
+    margin-bottom: 24px;
+    padding: 22px 24px;
+}
+.filters-row {
+    display: grid;
+    grid-template-columns: minmax(160px, 1fr) minmax(200px, 1.2fr) minmax(160px, 1fr) minmax(120px, 0.7fr) minmax(120px, 0.7fr);
+    gap: 18px;
+    align-items: end;
+}
+.filters-row .form-group {
+    margin-bottom: 0;
+    min-width: 0;
+}
+.filters-row label {
+    margin-bottom: 8px;
+    color: var(--clr-text-muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.filters-row select,
+.filters-row input {
+    min-height: 46px;
+    border-color: #D1D5DB;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: var(--clr-text-main);
+    font-size: 0.95rem;
+}
+.filters-row select:hover,
+.filters-row input:hover {
+    border-color: #9CA3AF;
+}
+.filters-row input::placeholder {
+    color: #9CA3AF;
+}
+
+/* Classes list */
+.classes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Individual class card */
+.class-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 15px;
+}
+.class-card.is-hidden {
+    display: none;
+}
+.class-card-info {
+    flex: 1;
+    min-width: 0;
+}
+.class-meta {
+    color: var(--clr-text-muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+.class-rating-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    color: var(--clr-text-muted);
+    font-size: 0.85rem;
+}
+.class-rating-score,
+.class-rating-count,
+.class-rating-empty {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    border-radius: 999px;
+    padding: 4px 10px;
+}
+.class-rating-score {
+    border: 1px solid #FCD34D;
+    background: #FFFBEB;
+    color: #92400E;
+}
+.class-rating-score strong {
+    color: #78350F;
+    margin-left: 4px;
+}
+.class-rating-count {
+    border: 1px solid #E5E7EB;
+    background: #F9FAFB;
+    color: var(--clr-text-muted);
+}
+.class-rating-empty {
+    border: 1px dashed #D1D5DB;
+    background: #F9FAFB;
+    color: var(--clr-text-muted);
+}
+.class-reviews-toggle {
+    min-height: 30px;
+    border: 1px solid #BFDBFE;
+    border-radius: 999px;
+    background: #EFF6FF;
+    color: var(--clr-primary);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    padding: 4px 12px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.class-reviews-toggle:hover,
+.class-reviews-toggle:focus-visible {
+    border-color: var(--clr-primary);
+    background: #DBEAFE;
+    color: var(--clr-primary-dark);
+    outline: none;
+}
+.class-reviews-panel {
+    margin-top: 14px;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
+    overflow: hidden;
+    box-shadow: inset 3px 0 0 #BFDBFE;
+}
+.class-review-item {
+    padding: 14px 16px;
+}
+.class-review-item + .class-review-item {
+    border-top: 1px solid #E5E7EB;
+}
+.class-review-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--clr-text-main);
+    font-size: 0.85rem;
+}
+.class-review-user strong {
+    font-size: 0.92rem;
+}
+.class-review-meta {
+    display: flex;
+    flex-shrink: 0;
+    gap: 8px;
+    text-align: right;
+    color: var(--clr-text-muted);
+}
+.class-review-item p {
+    margin: 10px 0 0;
+    color: var(--clr-text-main);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.class-actions {
+    flex-shrink: 0;
+    padding-top: 26px;
+}
+
+@media (max-width: 1000px) {
+    .filters-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .filters-section {
+        padding: 18px;
+    }
+
+    .filters-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .class-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .class-review-header,
+    .class-review-meta {
+        flex-direction: column;
+        gap: 4px;
+        text-align: left;
+    }
+
+    .class-actions {
+        padding-top: 0;
+        width: 100%;
+    }
+
+    .class-actions .btn {
+        width: 100%;
+    }
+}

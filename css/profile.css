@@ -1,0 +1,196 @@
+/* =====================
+   profile.css — Profile page styles
+   ===================== */
+
+/* Profile layout: single column on mobile, two columns on desktop */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+@media (min-width: 768px) {
+    .profile-layout {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+/* Sidebar */
+.profile-sidebar {
+    text-align: center;
+}
+
+.profile-photo-container {
+    margin-bottom: var(--spacing-md);
+}
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--clr-primary);
+}
+
+.profile-role {
+    color: var(--clr-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+}
+
+/* Plan section inside sidebar */
+.plan-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.plan-section h4 {
+    font-family: var(--font-titles);
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-sm);
+}
+.plan-tag {
+    margin: 10px 0;
+}
+
+/* Profile form */
+.profile-content h3 {
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--clr-background);
+    padding-bottom: var(--spacing-sm);
+}
+.form-actions {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    justify-content: flex-start;
+}
+.password-hint {
+    font-weight: 400;
+    color: #9CA3AF;
+}
+
+/* Enrolled classes section */
+.enrolled-section {
+    margin-top: 24px;
+}
+.enrolled-section h3 {
+    margin-bottom: 16px;
+}
+.enrolled-empty {
+    color: #9CA3AF;
+}
+.enrolled-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+.enrolled-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+.enrolled-item:last-child {
+    border-bottom: none;
+}
+.enrolled-row-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.enrolled-row-trainer {
+    color: #9CA3AF;
+}
+.enrolled-row-date {
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+.class-review-form {
+    margin-top: 12px;
+    padding: 18px;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+}
+.class-review-fields {
+    display: grid;
+    grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
+    gap: 18px;
+}
+.class-review-fields .form-group {
+    margin-bottom: 0;
+}
+.class-review-form textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 96px;
+    padding: 12px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    background: #FFFFFF;
+    color: var(--clr-text-main);
+    font: inherit;
+    line-height: 1.5;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.class-review-form textarea:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+}
+.class-review-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+.class-review-status,
+.class-review-locked {
+    color: var(--clr-text-muted);
+    font-size: 0.88rem;
+}
+.class-review-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    border: 1px solid #D1FAE5;
+    border-radius: 999px;
+    background: #ECFDF5;
+    color: #047857;
+    padding: 4px 10px;
+}
+.class-review-locked {
+    display: inline-flex;
+    margin-top: 10px;
+    margin-bottom: 0;
+    border: 1px dashed #D1D5DB;
+    border-radius: 999px;
+    background: #F9FAFB;
+    padding: 4px 10px;
+}
+
+@media (max-width: 700px) {
+    .enrolled-row,
+    .class-review-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .class-review-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Logout link */
+.logout-link {
+    color: #DC2626;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.logout-link:hover {
+    color: #991B1B;
+    text-decoration: underline;
+}

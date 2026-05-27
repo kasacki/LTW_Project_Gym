@@ -1,0 +1,695 @@
+/* =====================
+   trainer.css — Trainer Panel styles
+   ===================== */
+
+/* Tab Navigation */
+.profile-sidebar {
+    text-align: center;
+}
+
+.profile-photo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--clr-primary);
+}
+
+.trainer-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #E5E7EB;
+}
+
+.trainer-tab {
+    background: none;
+    border: none;
+    padding: 10px 24px;
+    font-family: var(--font-titles);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--clr-text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.trainer-tab:hover {
+    color: var(--clr-primary);
+}
+
+.trainer-tab.active {
+    color: var(--clr-primary-dark);
+    border-bottom-color: var(--clr-primary);
+}
+
+/* Tab Content */
+.trainer-tab-content {
+    display: none;
+}
+
+.trainer-tab-content.active {
+    display: block;
+}
+
+/* Sidebar extras */
+.trainer-specs-block {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+    text-align: left;
+}
+
+.trainer-specs-block h4 {
+    font-family: var(--font-titles);
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+    margin-bottom: 8px;
+}
+
+.trainer-specs-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.trainer-cert-text {
+    font-size: 0.88rem;
+    color: var(--clr-text-main);
+    margin: 0;
+}
+
+/* Schedule List */
+.trainer-schedule-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 20px;
+}
+
+.trainer-schedule-tools h3 {
+    margin-bottom: 4px;
+}
+
+.trainer-schedule-tools p {
+    color: var(--clr-text-muted);
+    margin-bottom: 0;
+}
+
+.trainer-schedule-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.trainer-schedule-stats span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    background: #F9FAFB;
+    color: var(--clr-text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 4px 10px;
+}
+
+.trainer-schedule-filters {
+    display: flex;
+    grid-column: 1 / -1;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.trainer-schedule-filter {
+    min-height: 34px;
+    border: 1px solid #D1D5DB;
+    border-radius: 999px;
+    background: #FFFFFF;
+    color: var(--clr-text-muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 800;
+    padding: 5px 13px;
+}
+
+.trainer-schedule-filter:hover,
+.trainer-schedule-filter.active {
+    border-color: #BFDBFE;
+    background: #EFF6FF;
+    color: var(--clr-primary-dark);
+}
+
+.trainer-schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trainer-class-row {
+    display: block;
+    padding: 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
+    transition: background 0.15s;
+}
+
+.trainer-class-row[hidden],
+.trainer-schedule-empty[hidden] {
+    display: none;
+}
+
+.trainer-class-row:hover {
+    background: #F3F4F6;
+}
+
+.trainer-class-row.past {
+    background: #F9FAFB;
+}
+
+.trainer-class-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.trainer-class-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 68px;
+    min-width: 68px;
+    min-height: 58px;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    background: #F8FAFC;
+}
+
+.trainer-class-date span {
+    color: var(--clr-primary-dark);
+    font-weight: 800;
+}
+
+.trainer-class-date small {
+    color: var(--clr-text-muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.trainer-class-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.trainer-class-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.trainer-class-name {
+    font-size: 1rem;
+    color: var(--clr-text-main);
+}
+
+.trainer-class-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+}
+
+.trainer-class-rating {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    color: var(--clr-text-muted);
+    font-size: 0.84rem;
+}
+
+.trainer-class-rating span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    background: #FFFFFF;
+    padding: 3px 9px;
+}
+
+.trainer-class-rating strong {
+    color: var(--clr-text-main);
+    margin-left: 4px;
+}
+
+.trainer-featured-badge {
+    background: #FEE2E2;
+    color: #991B1B;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.trainer-class-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.trainer-spots {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    font-size: 0.85rem;
+}
+
+.trainer-spots-num {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--clr-primary-dark);
+}
+
+.trainer-spots.full .trainer-spots-num {
+    color: #DC2626;
+}
+
+.trainer-spots-sep,
+.trainer-spots-total {
+    color: var(--clr-text-muted);
+}
+
+.trainer-spots-label {
+    color: var(--clr-text-muted);
+    font-size: 0.78rem;
+    margin-left: 2px;
+}
+
+.trainer-past-label  { font-size: 0.78rem; color: #9CA3AF; font-weight: 600; }
+.trainer-full-label  { font-size: 0.78rem; color: #DC2626; font-weight: 700; }
+.trainer-open-label  { font-size: 0.78rem; color: #059669; font-weight: 700; }
+
+.trainer-class-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.trainer-roster-jump {
+    min-height: 32px;
+    padding: 5px 12px;
+    font-size: 0.84rem;
+}
+
+.trainer-reviews-toggle {
+    min-height: 32px;
+    padding: 5px 12px;
+    font-size: 0.84rem;
+}
+
+.trainer-class-reviews {
+    margin-top: 14px;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
+    overflow: hidden;
+    box-shadow: inset 3px 0 0 #BFDBFE;
+}
+
+.trainer-class-reviews[hidden] {
+    display: none;
+}
+
+.trainer-class-review {
+    padding: 13px 15px;
+}
+
+.trainer-class-review + .trainer-class-review {
+    border-top: 1px solid #E5E7EB;
+}
+
+.trainer-class-review header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--clr-text-main);
+    font-size: 0.88rem;
+}
+
+.trainer-class-review header span {
+    color: var(--clr-text-muted);
+    flex-shrink: 0;
+}
+
+.trainer-class-review p,
+.trainer-class-review-empty {
+    margin: 8px 0 0;
+    color: var(--clr-text-main);
+    font-size: 0.9rem;
+}
+
+.trainer-class-review-empty {
+    padding: 13px 15px;
+}
+
+/* Roster Cards */
+.trainer-roster-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(220px, 320px);
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 20px;
+}
+
+.trainer-roster-tools h3 {
+    margin-bottom: 4px;
+}
+
+.trainer-roster-tools p {
+    color: var(--clr-text-muted);
+    margin-bottom: 0;
+}
+
+.trainer-roster-stats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.trainer-roster-stats span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    background: #F9FAFB;
+    color: var(--clr-text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 4px 10px;
+}
+
+.trainer-roster-search {
+    margin-bottom: 0;
+}
+
+.trainer-roster-card {
+    margin-bottom: 20px;
+}
+
+.trainer-roster-card[hidden],
+.trainer-roster-global-empty[hidden] {
+    display: none;
+}
+
+.trainer-roster-card.is-highlighted {
+    border-color: #BFDBFE;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+
+.trainer-roster-empty {
+    margin-top: 12px;
+}
+
+.trainer-roster-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.trainer-roster-header strong {
+    font-size: 1rem;
+    margin-left: 6px;
+}
+
+.trainer-roster-date {
+    color: var(--clr-text-muted);
+    font-size: 0.88rem;
+}
+
+.trainer-roster-room {
+    display: inline-flex;
+    margin-left: 8px;
+    color: var(--clr-text-muted);
+    font-size: 0.84rem;
+}
+
+.trainer-roster-count {
+    background: #EFF6FF;
+    color: var(--clr-primary-dark);
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* Roster Table */
+.trainer-roster-table-wrap {
+    overflow-x: auto;
+}
+
+.trainer-roster-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.trainer-roster-table th {
+    background: #F8FAFC;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--clr-text-muted);
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.trainer-roster-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #F1F5F9;
+    color: var(--clr-text-main);
+    vertical-align: middle;
+}
+
+.trainer-roster-table tr:last-child td {
+    border-bottom: none;
+}
+
+.trainer-roster-table tr:hover td {
+    background: #F8FAFC;
+}
+
+.trainer-roster-table a {
+    color: var(--clr-primary);
+    font-weight: 600;
+}
+
+.trainer-member-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 2px 9px;
+}
+
+.trainer-member-status.active {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.trainer-member-status.inactive {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+.trainer-roster-no-match {
+    color: var(--clr-text-muted);
+    margin: 12px 0 0;
+}
+
+/* Form textarea */
+textarea {
+    font-family: var(--font-text);
+    padding: 9px 12px;
+    border: 1.5px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    color: var(--clr-text-main);
+    background: #F9FAFB;
+    width: 100%;
+    resize: vertical;
+    transition: border-color 0.15s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    background: #fff;
+}
+
+/* ── Session Cards ── */
+.tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #DC2626;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.session-card {
+    margin-bottom: 16px;
+    border-left: 4px solid #E5E7EB;
+}
+.session-card.status-pending   { border-left-color: #F59E0B; }
+.session-card.status-confirmed { border-left-color: #10B981; }
+.session-card.status-rejected  { border-left-color: #EF4444; opacity: 0.7; }
+.session-card.status-cancelled { border-left-color: #9CA3AF; opacity: 0.6; }
+
+.session-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+.session-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.session-card-info strong { font-size: 1rem; }
+.session-email { font-size: 0.82rem; color: var(--clr-text-muted); }
+
+.session-status-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+.badge-pending   { background: #FEF3C7; color: #92400E; }
+.badge-confirmed { background: #D1FAE5; color: #065F46; }
+.badge-rejected  { background: #FEE2E2; color: #991B1B; }
+.badge-cancelled { background: #F1F5F9; color: #6B7280; }
+
+.session-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+    margin-bottom: 10px;
+}
+.session-card-meta span strong { color: var(--clr-text-main); }
+
+.session-notes, .session-trainer-note {
+    font-size: 0.88rem;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+.session-notes        { background: #F8FAFC; color: var(--clr-text-main); }
+.session-trainer-note { background: #EFF6FF; color: #1E40AF; }
+
+.session-respond-form { margin-top: 12px; padding-top: 12px; border-top: 1px solid #E5E7EB; }
+.session-respond-btns { display: flex; gap: 10px; margin-top: 10px; }
+
+@media (max-width: 900px) {
+    .trainer-schedule-tools {
+        grid-template-columns: 1fr;
+    }
+
+    .trainer-schedule-stats {
+        justify-content: flex-start;
+    }
+
+    .trainer-roster-tools {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+
+    .trainer-class-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .trainer-class-main {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .trainer-class-right {
+        align-items: flex-start;
+    }
+
+    .trainer-class-actions,
+    .trainer-roster-jump,
+    .trainer-reviews-toggle {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .trainer-tabs {
+        overflow-x: auto;
+    }
+
+    .trainer-tab {
+        flex: 0 0 auto;
+    }
+
+    .trainer-roster-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .session-card-header,
+    .session-respond-btns {
+        flex-direction: column;
+    }
+
+    .session-respond-btns .btn {
+        width: 100%;
+    }
+}

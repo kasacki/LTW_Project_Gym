@@ -1,0 +1,253 @@
+/* =====================
+   base.css — Global styles shared across all pages
+   ===================== */
+
+:root {
+    --clr-primary: #2563EB;
+    --clr-primary-dark: #1E3A8A;
+    --clr-background: #F3F4F6;
+    --clr-surface: #FFFFFF;
+    --clr-text-main: #111827;
+    --clr-text-muted: #6B7280;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 32px;
+    --border-radius: 8px;
+    --font-titles: 'Bebas Neue', sans-serif;
+    --font-text: 'Nunito', sans-serif;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-text);
+    background-color: var(--clr-background);
+    color: var(--clr-text-main);
+    line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, .logo {
+    font-family: var(--font-titles);
+    color: var(--clr-primary-dark);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 1.5px;
+    font-weight: normal;
+}
+
+p { margin-bottom: var(--spacing-md); }
+a { color: var(--clr-primary); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--clr-primary-dark); }
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-lg);
+    background-color: var(--clr-surface);
+    padding: 14px var(--spacing-lg);
+    color: var(--clr-text-main);
+    border-bottom: 1px solid #E5E7EB;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+.navbar .logo {
+    color: var(--clr-primary-dark);
+    font-size: 1.8rem;
+    line-height: 1;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+.navbar .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+}
+.navbar .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    border-radius: 999px;
+    color: var(--clr-text-main);
+    font-weight: 700;
+    padding: 6px 12px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.navbar .nav-links a:hover {
+    background-color: #EFF6FF;
+    color: var(--clr-primary-dark);
+    text-decoration: none;
+}
+.navbar .nav-links .nav-admin {
+    background-color: #FEF2F2;
+    color: #B91C1C;
+}
+.navbar .nav-links .nav-admin:hover {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+.navbar .nav-links .nav-trainer {
+    background-color: #ECFDF5;
+    color: #047857;
+}
+.navbar .nav-links .nav-trainer:hover {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+/* Card */
+.card {
+    background-color: var(--clr-surface);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #E5E7EB;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-family: var(--font-text);
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.btn:active { transform: scale(0.98); }
+
+.btn-primary { background-color: var(--clr-primary); color: var(--clr-surface); }
+.btn-primary:hover { background-color: var(--clr-primary-dark); color: var(--clr-surface); }
+
+.btn-secondary { background-color: transparent; color: var(--clr-primary); border: 2px solid var(--clr-primary); }
+.btn-secondary:hover { background-color: var(--clr-background); }
+.btn-full { width: 100%; }
+.btn-nav { padding: 5px 15px; }
+
+.navbar .btn-nav {
+    min-height: 34px;
+    padding: 5px 14px;
+}
+
+.navbar .nav-links .btn-primary {
+    color: var(--clr-surface);
+}
+
+.navbar .nav-links .btn-primary:hover {
+    background-color: var(--clr-primary-dark);
+    color: var(--clr-surface);
+}
+
+.navbar .nav-links .btn-secondary {
+    border-width: 1px;
+    color: var(--clr-primary);
+}
+
+.navbar .nav-links .btn-secondary:hover {
+    background-color: #EFF6FF;
+    color: var(--clr-primary-dark);
+}
+
+@media (max-width: 760px) {
+    .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 20px;
+    }
+
+    .navbar .nav-links {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+.access-denied {
+    text-align: center;
+    padding: 80px;
+    font-family: var(--font-text);
+}
+
+.access-denied h2 {
+    color: #991B1B;
+}
+
+/* Forms */
+.form-group { margin-bottom: var(--spacing-md); }
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--clr-text-main);
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    font-family: var(--font-text);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Page layout utils */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+.page-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    background-color: var(--clr-primary);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+}
+.tag-hiit     { background-color: #DC2626; }
+.tag-spinning { background-color: #D97706; }
+.tag-pilates  { background-color: #059669; }
+.tag-yoga     { background-color: #059669; }
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--clr-surface);
+    color: var(--clr-text-muted);
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid #E5E7EB;
+}
+
+/* Alerts */
+.alert {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+.alert-success { background: #D1FAE5; color: #065F46; }
+.alert-error   { background: #FEE2E2; color: #991B1B; }
