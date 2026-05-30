@@ -68,10 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['upgrade_membership'])) {
         $newTier = $_POST['tier'];
         if (in_array($newTier, ['basic', 'premium'])) {
-            $pdo->prepare("UPDATE members SET membership_tier = ? WHERE user_id = ?")
-                ->execute([$newTier, $userId]);
-            $message = "Plan changed to " . strtoupper($newTier);
-            header("Refresh:1");
+            if ($newTier !== $userData['membership_tier']) {
+                $pdo->prepare("UPDATE members SET membership_tier = ? WHERE user_id = ?")
+                    ->execute([$newTier, $userId]);
+                $message = "Plan changed to " . strtoupper($newTier);
+                header("Refresh:1");
+            } else {
+                header("Location: profile.php");
+                exit();
+            }
         }
     }
 

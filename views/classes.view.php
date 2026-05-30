@@ -12,10 +12,11 @@
                 <label for="filter-type">Type</label>
                 <select id="filter-type">
                     <option value="all">All</option>
-                    <option value="Yoga">Yoga</option>
-                    <option value="HIIT">HIIT</option>
-                    <option value="Pilates">Pilates</option>
-                    <option value="Spinning">Spinning</option>
+                    <?php foreach ($classTypes as $type): ?>
+                        <option value="<?= htmlspecialchars($type) ?>">
+                            <?= htmlspecialchars($type) ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
@@ -43,12 +44,20 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="filter-time-start">From</label>
+                <label for="filter-time-start">Time from</label>
                 <input type="text" id="filter-time-start" inputmode="numeric" maxlength="5" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" placeholder="HH:MM">
             </div>
             <div class="form-group">
-                <label for="filter-time-end">To</label>
+                <label for="filter-time-end">Time to</label>
                 <input type="text" id="filter-time-end" inputmode="numeric" maxlength="5" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" placeholder="HH:MM">
+            </div>
+            <div class="form-group">
+                <label for="filter-date-start">Date from</label>
+                <input type="date" id="filter-date-start">
+            </div>
+            <div class="form-group">
+                <label for="filter-date-end">Date to</label>
+                <input type="date" id="filter-date-end">
             </div>
         </div>
     </section>
@@ -59,7 +68,7 @@
                 $scheduledAt = strtotime($class['scheduled_at']);
                 $classDay = date('l', $scheduledAt);
                 $classTime = date('H:i', $scheduledAt);
-                $classDate = date('d.m.Y', $scheduledAt); // <-- DODANO: Formatowanie pełnej daty
+                $classDate = date('d M Y', $scheduledAt);
                 $reviewCount = (int)$class['review_count'];
                 $averageRating = $reviewCount > 0 ? number_format((float)$class['average_rating'], 1) : null;
                 $classReviews = $classReviewsByClassId[$class['id']] ?? [];
@@ -69,7 +78,8 @@
                      data-type="<?= htmlspecialchars($class['type']) ?>"
                      data-trainer="<?= htmlspecialchars($class['trainer_name']) ?>"
                      data-day="<?= htmlspecialchars($classDay) ?>"
-                     data-time="<?= htmlspecialchars($classTime) ?>">
+                     data-time="<?= htmlspecialchars($classTime) ?>"
+                     data-date="<?= htmlspecialchars(date('Y-m-d', $scheduledAt)) ?>">
                 <div class="class-card-info">
                     <span class="tag"><?= htmlspecialchars($class['type']) ?></span>
                     <h3><?= htmlspecialchars($class['name']) ?></h3>
@@ -106,11 +116,15 @@
                                 <?php
                                     $reviewDate = date('d M Y', strtotime($review['created_at']));
                                     $comment = trim($review['comment'] ?? '');
+                                    $reviewerName = trim($review['full_name'] ?? '') ?: $review['username'];
                                 ?>
                                 <article class="class-review-item">
                                     <header class="class-review-header">
                                         <div class="class-review-user">
-                                            <strong><?= htmlspecialchars($review['username']) ?></strong>
+                                            <strong>
+                                                <?= htmlspecialchars($reviewerName) ?>
+                                                (<?= htmlspecialchars($review['username']) ?>)
+                                            </strong>
                                         </div>
                                         <div class="class-review-meta">
                                             <span><?= (int)$review['rating'] ?>/5</span>

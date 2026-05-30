@@ -5,6 +5,19 @@ const timeStartFilter = document.getElementById('filter-time-start');
 const timeEndFilter = document.getElementById('filter-time-end');
 const classCards = document.querySelectorAll('.class-card');
 const classesPage = document.querySelector('[data-csrf-token]');
+const dateStartFilter = document.getElementById('filter-date-start');
+const dateEndFilter = document.getElementById('filter-date-end');
+
+const initialType = new URLSearchParams(window.location.search).get('type');
+const initialTrainer = new URLSearchParams(window.location.search).get('trainer');
+
+if (initialType && typeFilter && Array.from(typeFilter.options).some(option => option.value === initialType)) {
+    typeFilter.value = initialType;
+}
+
+if (initialTrainer && trainerFilter && Array.from(trainerFilter.options).some(option => option.value === initialTrainer)) {
+    trainerFilter.value = initialTrainer;
+}
 
 function normalizeTime(value) {
     const match = value.trim().match(/^([01]?\d|2[0-3]):([0-5]\d)$/);
@@ -55,21 +68,27 @@ function filterClasses() {
     const day = dayFilter?.value || 'all';
     const timeStart = normalizeTime(timeStartFilter?.value || '');
     const timeEnd = normalizeTime(timeEndFilter?.value || '');
+    const dateStart = dateStartFilter?.value || '';
+    const dateEnd = dateEndFilter?.value || '';
 
     classCards.forEach(card => {
         const matchesType = type === 'all' || card.dataset.type === type;
         const matchesTrainer = trainer === 'all' || card.dataset.trainer === trainer;
         const matchesDay = day === 'all' || card.dataset.day === day;
-        const matchesStart = !timeStart || card.dataset.time >= timeStart;
-        const matchesEnd = !timeEnd || card.dataset.time <= timeEnd;
+        const matchesTimeStart = !timeStart || card.dataset.time >= timeStart;
+        const matchesTimeEnd = !timeEnd || card.dataset.time <= timeEnd;
+        const matchesDateStart = !dateStart || card.dataset.date >= dateStart;
+        const matchesDateEnd = !dateEnd || card.dataset.date <= dateEnd;
 
-        const shouldHide = !(matchesType && matchesTrainer && matchesDay && matchesStart && matchesEnd);
+        const shouldHide = !(matchesType && matchesTrainer && matchesDay && matchesTimeStart && matchesTimeEnd && matchesDateStart && matchesDateEnd);
         card.hidden = shouldHide;
         card.classList.toggle('is-hidden', shouldHide);
     });
 }
 
 typeFilter?.addEventListener('change', filterClasses);
+dateStartFilter?.addEventListener('change', filterClasses);
+dateEndFilter?.addEventListener('change', filterClasses);
 trainerFilter?.addEventListener('change', filterClasses);
 dayFilter?.addEventListener('change', filterClasses);
 
@@ -117,3 +136,5 @@ document.querySelectorAll('.class-enroll-action').forEach(button => {
             });
     });
 });
+
+filterClasses();

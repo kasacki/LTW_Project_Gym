@@ -25,7 +25,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="logo">FITLIFE</div>
         <ul class="nav-links">
             <li><a href="index.php">Home</a></li>
-            <li><a href="classes.php">Classes</a></li>
+            <li><a href="class_catalog.php">Classes</a></li>
+            <li><a href="classes.php">Schedule</a></li>
+            <li><a href="trainers.php">Trainers</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <li><a href="equipment.php">Equipment</a></li>
                 <li><a href="profile.php">Profile</a></li>

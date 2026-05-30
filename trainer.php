@@ -61,6 +61,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+
+    if ($action === 'update_class') {
+        $classId = (int)$_POST['class_id'];
+        // Verify this class belongs to the trainer
+        $check = $pdo->prepare("SELECT id, scheduled_at FROM classes WHERE id = ? AND trainer_id = ?");
+        $check->execute([$classId, $trainerId]);
+        $classRow = $check->fetch();
+        if (!$classRow) {
+            $error = "Class not found or access denied.";
+        } elseif (strtotime($classRow['scheduled_at']) < time()) {
+            $error = "Cannot edit a class that has already taken place.";
+        } else {
+            $name        = trim($_POST['class_name'] ?? '');
+            $room        = trim($_POST['room'] ?? '');
+            $scheduledAt = trim($_POST['scheduled_at'] ?? '');
+            $durationMin = (int)($_POST['duration_min'] ?? 60);
+            if (empty($name) || empty($scheduledAt) || $durationMin < 1) {
+                $error = "Class name, date/time and duration are required.";
+            } else {
+                $pdo->prepare("UPDATE classes SET name=?, room=?, scheduled_at=?, duration_min=? WHERE id=? AND trainer_id=?")
+                    ->execute([$name, $room, $scheduledAt, $durationMin, $classId, $trainerId]);
+                $message = "Class updated successfully.";
+            }
+        }
+    }
+
+    if ($action === 'cancel_class') {
+        $classId = (int)$_POST['class_id'];
+        $reason  = trim($_POST['cancel_reason'] ?? '');
+        // Verify this class belongs to the trainer
+        $check = $pdo->prepare("SELECT id, scheduled_at FROM classes WHERE id = ? AND trainer_id = ?");
+        $check->execute([$classId, $trainerId]);
+        $classRow = $check->fetch();
+        if (!$classRow) {
+            $error = "Class not found or access denied.";
+        } elseif (strtotime($classRow['scheduled_at']) < time()) {
+            $error = "Cannot cancel a class that has already taken place.";
+        } else {
+            $pdo->prepare("UPDATE classes SET is_cancelled=1, cancelled_reason=? WHERE id=? AND trainer_id=?")
+                ->execute([$reason, $classId, $trainerId]);
+            $message = "Class cancelled. Enrolled members will see it as cancelled.";
+        }
+    }
+
+    if ($action === 'restore_class') {
+        $classId = (int)$_POST['class_id'];
+        $check = $pdo->prepare("SELECT id FROM classes WHERE id = ? AND trainer_id = ?");
+        $check->execute([$classId, $trainerId]);
+        if ($check->fetch()) {
+            $pdo->prepare("UPDATE classes SET is_cancelled=0, cancelled_reason=NULL WHERE id=? AND trainer_id=?")
+                ->execute([$classId, $trainerId]);
+            $message = "Class restored.";
+        } else {
+            $error = "Class not found or access denied.";
+        }
+    }
+
     if ($action === 'respond_session') {
         $sessionId   = (int)$_POST['session_id'];
         $status      = $_POST['status'];

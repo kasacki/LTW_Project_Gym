@@ -10,7 +10,8 @@ $page_js = 'classes';
 $userId = $_SESSION['member_id'] ?? null;
 
 // Fetch trainers for filters
-$trainers = $pdo->query("SELECT id, full_name FROM trainers")->fetchAll();
+$trainers = $pdo->query("SELECT id, full_name FROM trainers WHERE is_active = 1")->fetchAll();
+$classTypes = $pdo->query("SELECT DISTINCT type FROM classes ORDER BY type")->fetchAll(PDO::FETCH_COLUMN);
 
 // Fetch all classes with enrollment and review summaries
 $stmt = $pdo->prepare("
@@ -22,6 +23,8 @@ $stmt = $pdo->prepare("
     FROM classes c
     JOIN trainers t ON c.trainer_id = t.id
     WHERE c.scheduled_at >= DATETIME('now', 'localtime')
+    AND COALESCE(c.is_cancelled, 0) = 0
+    AND t.is_active = 1
     ORDER BY c.scheduled_at ASC
 ");
 $stmt->execute([$userId]);
@@ -34,6 +37,7 @@ if (!empty($classIds)) {
     $placeholders = implode(',', array_fill(0, count($classIds), '?'));
     $stmt = $pdo->prepare("
         SELECT r.class_id, r.rating, r.comment, r.created_at,
+               m.full_name,
                u.username
         FROM reviews r
         JOIN members m ON r.member_id = m.id

@@ -189,7 +189,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($trainers as $t): ?>
-                        <?php $isDeactivated = str_contains($t['bio'] ?? '', '[DEACTIVATED]'); ?>
+                        <?php $isDeactivated = !($t['is_active'] ?? 1); ?>
                         <tr data-search="<?= htmlspecialchars(strtolower($t['full_name'] . ' ' . $t['username'] . ' ' . $t['email'] . ' ' . ($t['specializations'] ?? '') . ' ' . ($isDeactivated ? 'inactive' : 'active')), ENT_QUOTES, 'UTF-8') ?>">
                             <td><strong><?= htmlspecialchars($t['full_name']) ?></strong></td>
                             <td><?= htmlspecialchars($t['username']) ?></td>
@@ -209,6 +209,13 @@
                                         <input type="hidden" name="action" value="deactivate_trainer">
                                         <input type="hidden" name="user_id" value="<?= (int)$t['user_id'] ?>">
                                         <button type="submit" class="btn-admin-danger">Deactivate</button>
+                                    </form>
+                                    <?php else: ?>
+                                    <form method="POST" class="admin-action-form" data-confirm="Reactivate this trainer?">
+                                        <?= csrf_input() ?>
+                                        <input type="hidden" name="action" value="reactivate_trainer">
+                                        <input type="hidden" name="user_id" value="<?= (int)$t['user_id'] ?>">
+                                        <button type="submit" class="btn-admin-success">Reactivate</button>
                                     </form>
                                     <?php endif; ?>
                                     <form method="POST" class="admin-action-form" data-confirm="Promote <?= htmlspecialchars($t['username'], ENT_QUOTES, 'UTF-8') ?> to Admin? This removes the trainer profile.">
@@ -601,7 +608,7 @@
                     <label>Trainer</label>
                     <select name="trainer_id" required>
                         <?php foreach ($trainers as $t): ?>
-                            <?php if (!str_contains($t['bio'] ?? '', '[DEACTIVATED]')): ?>
+                            <?php if ($t['is_active'] ?? 1): ?>
                             <option value="<?= (int)$t['trainer_id'] ?>"><?= htmlspecialchars($t['full_name']) ?></option>
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -670,7 +677,13 @@
                     <label>Trainer</label>
                     <select name="trainer_id" id="edit-class-trainer" required>
                         <?php foreach ($trainers as $t): ?>
-                        <option value="<?= (int)$t['trainer_id'] ?>"><?= htmlspecialchars($t['full_name']) ?></option>
+                        <?php $trainerIsDeactivated = !($t['is_active'] ?? 1); ?>
+                        <option
+                            value="<?= (int)$t['trainer_id'] ?>"
+                            data-deactivated="<?= $trainerIsDeactivated ? 'true' : 'false' ?>"
+                        >
+                            <?= htmlspecialchars($t['full_name']) ?><?= $trainerIsDeactivated ? ' (inactive)' : '' ?>
+                        </option>
                         <?php endforeach; ?>
                     </select>
                 </div>

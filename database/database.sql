@@ -38,6 +38,7 @@ CREATE TABLE trainers (
     bio TEXT,
     specializations TEXT,
     certifications TEXT,
+    is_active INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0, 1)),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -58,6 +59,8 @@ CREATE TABLE classes (
     capacity INTEGER NOT NULL DEFAULT 20 CHECK (capacity > 0),
     scheduled_at DATETIME NOT NULL,
     duration_min INTEGER NOT NULL DEFAULT 60 CHECK (duration_min > 0),
+    is_cancelled INTEGER NOT NULL DEFAULT 0 CHECK (is_cancelled IN (0, 1)),
+    cancelled_reason TEXT,
     is_featured INTEGER NOT NULL DEFAULT 0 CHECK (is_featured IN (0, 1)),
     FOREIGN KEY (trainer_id) REFERENCES trainers(id)
 );

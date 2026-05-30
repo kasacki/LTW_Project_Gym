@@ -22,6 +22,12 @@ $stmt->execute([$trainerId]);
 $trainer = $stmt->fetch();
 if (!$trainer) { header("Location: index.php"); exit(); }
 
+// Block access to deactivated trainer profiles (unless admin)
+if (!($trainer['is_active'] ?? 1) && ($_SESSION['role'] ?? '') !== 'admin') {
+    header("Location: trainers.php");
+    exit();
+}
+
 // Get member_id of current user (if member)
 $memberId = null;
 if ($role === 'member') {

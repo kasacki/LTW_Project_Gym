@@ -162,12 +162,28 @@ function ensureTrainerExists(PDO $pdo, int $trainerId): void {
         JOIN users u ON t.user_id = u.id
         WHERE t.id = ?
           AND u.role = 'trainer'
-          AND COALESCE(t.bio, '') NOT LIKE '%[DEACTIVATED]%'
+          AND t.is_active = 1
     ");
     $stmt->execute([$trainerId]);
 
     if (!$stmt->fetch()) {
         throw new InvalidArgumentException('Please choose an active trainer.');
+    }
+}
+
+function ensureTrainerCanBeDeactivated(PDO $pdo, int $userId): void {
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM classes c
+        JOIN trainers t ON c.trainer_id = t.id
+        WHERE t.user_id = ?
+          AND c.scheduled_at >= datetime('now', 'localtime')
+    ");
+    $stmt->execute([$userId]);
+    $upcomingClassCount = (int)$stmt->fetchColumn();
+
+    if ($upcomingClassCount > 0) {
+        throw new InvalidArgumentException('This trainer has upcoming classes. Reassign or remove those classes before deactivating the trainer.');
     }
 }
 
@@ -364,16 +380,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         elseif ($action === 'deactivate_trainer') {
             $uid = readPositiveInt('user_id', 'User');
             ensureUserRoleExists($pdo, $uid, 'trainer');
-            $stmt = $pdo->prepare("
-                UPDATE trainers
-                SET bio = CASE
-                    WHEN COALESCE(bio, '') LIKE '%[DEACTIVATED]%' THEN bio
-                    ELSE COALESCE(bio, '') || ' [DEACTIVATED]'
-                END
-                WHERE user_id=?
-            ");
-            $stmt->execute([$uid]);
+            ensureTrainerCanBeDeactivated($pdo, $uid);
+            $pdo->prepare("UPDATE trainers SET is_active=0 WHERE user_id=?")
+                ->execute([$uid]);
             $success = "Trainer account deactivated.";
+        }
+
+        elseif ($action === 'reactivate_trainer') {
+            $uid = readPositiveInt('user_id', 'User');
+            ensureUserRoleExists($pdo, $uid, 'trainer');
+            $pdo->prepare("UPDATE trainers SET is_active=1 WHERE user_id=?")
+                ->execute([$uid]);
+            $success = "Trainer account reactivated.";
         }
 
         // CLASSES
@@ -509,7 +527,7 @@ $members = $pdo->query("
 
 $trainers = $pdo->query("
     SELECT u.id as user_id, u.username, u.email, t.id as trainer_id,
-           t.full_name, t.bio, t.specializations, t.certifications
+           t.full_name, t.bio, t.specializations, t.certifications, t.is_active
     FROM users u JOIN trainers t ON u.id = t.user_id
     ORDER BY t.full_name
 ")->fetchAll();

@@ -53,6 +53,12 @@ function openEditTrainer(trainer) {
 }
 
 function openEditClass(classItem) {
+    const trainerSelect = document.getElementById('edit-class-trainer');
+
+    trainerSelect?.querySelectorAll('option').forEach(option => {
+        option.hidden = option.dataset.deactivated === 'true' && option.value !== String(classItem.trainer_id);
+    });
+
     setValue('edit-class-id', classItem.id);
     setValue('edit-class-name', classItem.name);
     setValue('edit-class-type', classItem.type);

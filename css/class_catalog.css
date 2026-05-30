@@ -1,0 +1,151 @@
+.class-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.class-type-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+
+.class-type-image-wrap {
+    aspect-ratio: 16 / 9;
+    background: #E5E7EB;
+    overflow: hidden;
+}
+
+.class-type-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.class-type-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px;
+}
+
+.class-type-heading h3 {
+    margin: 8px 0 0;
+    font-size: 1.8rem;
+}
+
+.class-type-stats,
+.class-type-rating {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.class-type-stats span,
+.class-type-rating span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    border-radius: 999px;
+    background: #F8FAFC;
+    color: var(--clr-text-muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    padding: 4px 10px;
+}
+
+.class-type-rating span:first-child {
+    background: #FFFBEB;
+    color: #92400E;
+}
+
+.class-type-rating strong {
+    margin-left: 4px;
+}
+
+.class-type-trainers,
+.class-type-next,
+.class-type-description,
+.class-catalog-empty p {
+    color: var(--clr-text-muted);
+    margin-bottom: 0;
+}
+
+.class-type-description {
+    line-height: 1.5;
+}
+
+.class-type-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.class-type-card .btn {
+    width: fit-content;
+}
+
+.class-type-reviews {
+    border-top: 1px solid #E5E7EB;
+    padding-top: 12px;
+}
+
+.class-type-reviews summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    border: 1px solid #BFDBFE;
+    border-radius: var(--border-radius);
+    background: #EFF6FF;
+    color: var(--clr-primary);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 8px 14px;
+    width: fit-content;
+}
+
+.class-type-reviews summary:hover {
+    background: #DBEAFE;
+    color: var(--clr-primary-dark);
+}
+
+.class-type-review-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.class-type-review {
+    border: 1px solid #E5E7EB;
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
+    padding: 12px;
+}
+
+.class-type-review header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--clr-text-main);
+}
+
+.class-type-review small {
+    display: block;
+    color: var(--clr-text-muted);
+    margin-top: 4px;
+}
+
+.class-type-review p {
+    margin: 8px 0 0;
+}
+
+@media (max-width: 600px) {
+    .class-type-card .btn,
+    .class-type-reviews summary {
+        width: 100%;
+    }
+}

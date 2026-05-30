@@ -143,10 +143,14 @@
                     $reviewSummary = $classReviewSummaries[$class['id']] ?? ['average_rating' => null, 'review_count' => 0];
                     $reviewsPanelId = 'schedule-reviews-' . (int)$class['id'];
                 ?>
-                <article class="card trainer-class-row <?= $isPast ? 'past' : '' ?>"
+                <?php $isCancelled = !empty($class['is_cancelled']); ?>
+                <article class="card trainer-class-row <?= $isPast ? 'past' : '' ?> <?= $isCancelled ? 'cancelled' : '' ?>"
                          data-schedule-row
                          data-schedule-status="<?= htmlspecialchars($scheduleStatus, ENT_QUOTES, 'UTF-8') ?>"
                          data-schedule-full="<?= $isFull ? 'true' : 'false' ?>">
+                    <?php if ($isCancelled): ?>
+                        <div class="class-cancelled-banner">⚠ Class cancelled<?= !empty($class['cancelled_reason']) ? ': ' . htmlspecialchars($class['cancelled_reason']) : '' ?></div>
+                    <?php endif; ?>
                     <div class="trainer-class-main">
                         <div class="trainer-class-date">
                             <span><?= htmlspecialchars(date('d M', $scheduledAt)) ?></span>
@@ -204,6 +208,29 @@
                                     >
                                         View reviews
                                     </button>
+                                <?php else: ?>
+                                    <?php if (!$isCancelled): ?>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-edit-class="<?= (int)$class['id'] ?>"
+                                            data-class-name="<?= htmlspecialchars($class['name'], ENT_QUOTES) ?>"
+                                            data-class-room="<?= htmlspecialchars($class['room'] ?? '', ENT_QUOTES) ?>"
+                                            data-class-scheduled="<?= htmlspecialchars(date('Y-m-d\\TH:i', strtotime($class['scheduled_at'])), ENT_QUOTES) ?>"
+                                            data-class-duration="<?= (int)$class['duration_min'] ?>">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger"
+                                            data-cancel-class="<?= (int)$class['id'] ?>"
+                                            data-class-name="<?= htmlspecialchars($class['name'], ENT_QUOTES) ?>">
+                                            Cancel class
+                                        </button>
+                                    <?php else: ?>
+                                        <form method="POST" style="display:inline">
+                                            <?= csrf_input() ?>
+                                            <input type="hidden" name="action" value="restore_class">
+                                            <input type="hidden" name="class_id" value="<?= (int)$class['id'] ?>">
+                                            <button type="submit" class="btn btn-secondary">Restore</button>
+                                        </form>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -237,6 +264,60 @@
                 <p class="enrolled-empty">No assigned classes match this filter.</p>
             </div>
         <?php endif; ?>
+    </div>
+
+
+    <!-- Modal: Edit Class -->
+    <div id="modal-edit-class" class="trainer-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-edit-title">
+        <div class="trainer-modal-box">
+            <h3 id="modal-edit-title">Edit class</h3>
+            <form method="POST">
+                <?= csrf_input() ?>
+                <input type="hidden" name="action" value="update_class">
+                <input type="hidden" name="class_id" id="edit-class-id">
+                <div class="form-group">
+                    <label>Class name</label>
+                    <input type="text" name="class_name" id="edit-class-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Room</label>
+                    <input type="text" name="room" id="edit-class-room" placeholder="e.g. Studio A">
+                </div>
+                <div class="form-group">
+                    <label>Date &amp; time</label>
+                    <input type="datetime-local" name="scheduled_at" id="edit-class-scheduled" required>
+                </div>
+                <div class="form-group">
+                    <label>Duration (minutes)</label>
+                    <input type="number" name="duration_min" id="edit-class-duration" min="5" max="300" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-close-modal="modal-edit-class">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Cancel Class -->
+    <div id="modal-cancel-class" class="trainer-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-cancel-title">
+        <div class="trainer-modal-box">
+            <h3 id="modal-cancel-title">Cancel class</h3>
+            <p id="modal-cancel-class-name" class="trainer-modal-desc"></p>
+            <form method="POST">
+                <?= csrf_input() ?>
+                <input type="hidden" name="action" value="cancel_class">
+                <input type="hidden" name="class_id" id="cancel-class-id">
+                <div class="form-group">
+                    <label>Reason for cancellation <span class="password-hint">(optional)</span></label>
+                    <input type="text" name="cancel_reason" placeholder="e.g. trainer illness, room unavailable...">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger">Confirm cancellation</button>
+                    <button type="button" class="btn btn-secondary" data-close-modal="modal-cancel-class">Go back</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- TAB: ROSTERS -->

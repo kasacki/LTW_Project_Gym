@@ -190,6 +190,62 @@
     margin-bottom: 14px;
 }
 
+.tp-form label {
+    color: var(--clr-text-main);
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.tp-review-form textarea,
+.tp-session-form textarea,
+.tp-session-form input,
+.tp-session-form select {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    background: #FFFFFF;
+    color: var(--clr-text-main);
+    font: inherit;
+    padding: 11px 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.tp-review-form textarea,
+.tp-session-form textarea {
+    min-height: 112px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.tp-session-form input[type="datetime-local"] {
+    min-height: 54px;
+}
+
+.tp-session-form select {
+    appearance: auto;
+    min-height: 54px;
+}
+
+.tp-review-form textarea:focus,
+.tp-session-form textarea:focus,
+.tp-session-form input:focus,
+.tp-session-form select:focus {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+    outline: none;
+}
+
+.tp-review-form textarea::placeholder,
+.tp-session-form textarea::placeholder {
+    color: #94A3B8;
+}
+
+.tp-review-form .btn,
+.tp-session-form .btn {
+    width: 100%;
+}
+
 .tp-schedule-link {
     display: inline-block;
     margin-top: 16px;

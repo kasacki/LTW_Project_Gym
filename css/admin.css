@@ -633,3 +633,20 @@
         width: 100%;
     }
 }
+
+/* ── Admin: Reactivate button ── */
+.btn-admin-success {
+    background: #38a169;
+    color: #fff;
+    border: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.btn-admin-success:hover {
+    background: #2f855a;
+}

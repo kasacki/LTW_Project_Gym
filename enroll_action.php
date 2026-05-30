@@ -27,8 +27,6 @@ if ($classId <= 0 || !in_array($action, ['enroll', 'cancel'], true)) {
 }
 
 if ($action === 'enroll') {
-    // checking teh date and class capacity limit
-    
     $stmt = $pdo->prepare("SELECT capacity, scheduled_at, (SELECT COUNT(*) FROM enrollments WHERE class_id = id) as current FROM classes WHERE id = ?");
     $stmt->execute([$classId]);
     $class = $stmt->fetch();

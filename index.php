@@ -19,7 +19,7 @@ $trainers = $pdo->query("
     FROM trainers t
     JOIN users u ON t.user_id = u.id
     LEFT JOIN trainer_reviews r ON r.trainer_id = t.id
-    WHERE t.bio NOT LIKE '%[DEACTIVATED]%'
+    WHERE t.is_active = 1
     GROUP BY t.id
     ORDER BY t.full_name
 ")->fetchAll();

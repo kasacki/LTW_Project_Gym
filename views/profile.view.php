@@ -29,16 +29,8 @@
                 <div class="tag plan-tag <?= ($userData['membership_tier'] ?? 'basic') === 'premium' ? 'tag-hiit' : 'tag-yoga' ?>">
                     <?= strtoupper(htmlspecialchars($userData['membership_tier'] ?? 'basic')) ?>
                 </div>
-                <form method="POST">
-                    <?= csrf_input() ?>
-                    <?php if (($userData['membership_tier'] ?? 'basic') === 'basic'): ?>
-                        <input type="hidden" name="tier" value="premium">
-                        <button type="submit" name="upgrade_membership" class="btn btn-primary btn-full">Upgrade to Premium</button>
-                    <?php else: ?>
-                        <input type="hidden" name="tier" value="basic">
-                        <button type="submit" name="upgrade_membership" class="btn btn-secondary btn-full">Switch to Basic</button>
-                    <?php endif; ?>
-                </form>
+                
+                <a href="upgrade.php" class="btn btn-primary btn-full" style="display: block; text-align: center; text-decoration: none; margin-top: 10px; box-sizing: border-box;">View Plan Options</a>
             </div>
         </aside>
 

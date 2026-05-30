@@ -120,3 +120,66 @@ document.querySelectorAll('[data-review-toggle]').forEach(button => {
         button.textContent = shouldOpen ? 'Hide reviews' : 'View reviews';
     });
 });
+
+// Schedule management: Edit and Cancel modals
+const editModal = document.getElementById('modal-edit-class');
+const cancelModal = document.getElementById('modal-cancel-class');
+
+function openModal(modal) {
+    if (!modal) return;
+    modal.hidden = false;
+    modal.querySelector('input, button')?.focus();
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modal) {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+}
+
+// Edit class button handler
+document.querySelectorAll('[data-edit-class]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.getElementById('edit-class-id').value = btn.dataset.editClass;
+        document.getElementById('edit-class-name').value = btn.dataset.className;
+        document.getElementById('edit-class-room').value = btn.dataset.classRoom;
+        document.getElementById('edit-class-scheduled').value = btn.dataset.classScheduled;
+        document.getElementById('edit-class-duration').value = btn.dataset.classDuration;
+        openModal(editModal);
+    });
+});
+
+// Cancel class button handler
+document.querySelectorAll('[data-cancel-class]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.getElementById('cancel-class-id').value = btn.dataset.cancelClass;
+        const descEl = document.getElementById('modal-cancel-class-name');
+        if (descEl) descEl.textContent = `Class: ${btn.dataset.className}`;
+        openModal(cancelModal);
+    });
+});
+
+// Close modal buttons
+document.querySelectorAll('[data-close-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modal = document.getElementById(btn.dataset.closeModal);
+        closeModal(modal);
+    });
+});
+
+// Close modal on backdrop click
+[editModal, cancelModal].forEach(modal => {
+    modal?.addEventListener('click', e => {
+        if (e.target === modal) closeModal(modal);
+    });
+});
+
+// Close on Escape key
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        [editModal, cancelModal].forEach(modal => {
+            if (!modal?.hidden) closeModal(modal);
+        });
+    }
+});
